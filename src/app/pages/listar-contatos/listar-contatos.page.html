@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>listar-contatos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">listar-contatos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-list>
+    @for (usuario of usuarios; track usuario.id){
+    <ion-item>
+      <ion-label>
+        <h2>{{ usuario.name }}</h2>
+        <p>{{ usuario.email }}</p>
+      </ion-label>
+    </ion-item>
+  }
+  </ion-list>
+
+  @if (usuarios.length === 0) {
+    <ion-text color="medium">
+      <p>Nenhum contato encontrado.</p>
+    </ion-text>
+  }
+</ion-content>
+

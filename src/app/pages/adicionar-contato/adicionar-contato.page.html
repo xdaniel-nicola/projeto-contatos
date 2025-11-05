@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Adicionar Contato</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-item>
+    <ion-label position="stacked">Nome</ion-label>
+    <ion-input [(ngModel)]="contato.nome"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Email</ion-label>
+    <ion-input [(ngModel)]="contato.email"></ion-input>
+  </ion-item>
+
+  <ion-button expand="full" (click)="salvarContato()">Salvar Contato</ion-button>
+
+  <h2 style="margin: 16px 0;">Contatos Cadastrados</h2>
+  <ion-list>
+    @for (let c of contatos) {
+      <ion-item>
+        <ion-label>
+          <h3>{{ c.nome }}</h3>
+          <p>{{ c.email }}</p>
+        </ion-label>
+      </ion-item>
+    }
+  </ion-list>
+
+  @if (contatos.length === 0) {
+    <ion-text color="medium">
+      <p>Nenhum contato encontrado.</p>
+    </ion-text>
+  }
+</ion-content>
