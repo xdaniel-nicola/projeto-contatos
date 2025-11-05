@@ -19,19 +19,15 @@
 
   <h2 style="margin: 16px 0;">Contatos Cadastrados</h2>
   <ion-list>
-    @for (let c of contatos) {
-      <ion-item>
-        <ion-label>
-          <h3>{{ c.nome }}</h3>
-          <p>{{ c.email }}</p>
-        </ion-label>
-      </ion-item>
-    }
+    <ion-item *ngFor="let c of contatos; trackBy: trackById">
+      <ion-label>
+        <h3>{{ c.nome }}</h3>
+        <p>{{ c.email }}</p>
+      </ion-label>
+    </ion-item>
   </ion-list>
 
-  @if (contatos.length === 0) {
-    <ion-text color="medium">
-      <p>Nenhum contato encontrado.</p>
-    </ion-text>
-  }
+  <ion-text color="medium" *ngIf="contatos.length === 0">
+    <p>Nenhum contato encontrado.</p>
+  </ion-text>
 </ion-content>
