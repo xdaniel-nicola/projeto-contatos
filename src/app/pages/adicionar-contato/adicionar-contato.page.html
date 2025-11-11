@@ -1,6 +1,12 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Adicionar Contato</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/home']" color="medium">
+        <ion-icon slot="icon-only" name="arrow-forward-circle"></ion-icon>
+      </ion-button>
+      HOME
+    </ion-buttons>    
+    <ion-title>Adicionar Contatos</ion-title>
   </ion-toolbar>
 </ion-header>
 

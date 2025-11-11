@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, 
   IonItem, IonLabel, IonList, IonButton, IonText
-  ,IonInput } from '@ionic/angular/standalone';
+  ,IonInput, IonButtons, IonIcon } from '@ionic/angular/standalone';
 import { FirebaseService, Contato } from 'src/app/services/firebase';
+import { addIcons } from 'ionicons';
+import { RouterLink } from '@angular/router';
+import { arrowBackCircle, arrowForwardCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-adicionar-contato',
@@ -21,14 +24,19 @@ import { FirebaseService, Contato } from 'src/app/services/firebase';
     IonList,
     IonButton,
     IonText,
-    IonInput
+    IonInput,
+    IonButtons,
+    RouterLink,
+    IonIcon
   ]
 })
 export class AdicionarContatoPage implements OnInit {
   contato: Contato = { nome: '', email: '' };
   contatos: Contato[] = [];
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firebaseService: FirebaseService) {
+    addIcons({ arrowForwardCircle, arrowBackCircle });
+  }
 
   ngOnInit() {
     this.carregarContatos();

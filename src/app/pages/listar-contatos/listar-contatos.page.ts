@@ -7,7 +7,12 @@ import { IonContent, IonHeader, IonTitle, IonToolbar
   ,IonItem
   ,IonLabel
   ,IonText
+  ,IonButtons
+  ,IonIcon
  } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { RouterLink } from '@angular/router';
+import { arrowBackCircle, arrowForwardCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-listar-contatos',
@@ -18,13 +23,18 @@ import { IonContent, IonHeader, IonTitle, IonToolbar
     ,IonList
     ,IonItem
     ,IonLabel
-    ,IonText
+    ,IonText,
+    IonButtons,
+    RouterLink,
+    IonIcon
   ]
 })
 export class ListarContatosPage implements OnInit {
 
   usuarios: any[] = [];
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+    addIcons({ arrowForwardCircle, arrowBackCircle });
+  }
 
   ngOnInit() {
     this.apiService.getUsers().subscribe({
