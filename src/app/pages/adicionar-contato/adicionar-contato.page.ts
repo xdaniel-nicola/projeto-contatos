@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonItem, IonLabel, IonList, IonButton, IonText } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, 
+  IonItem, IonLabel, IonList, IonButton, IonText
+  ,IonInput } from '@ionic/angular/standalone';
 import { FirebaseService, Contato } from 'src/app/services/firebase';
 
 @Component({
@@ -18,7 +20,8 @@ import { FirebaseService, Contato } from 'src/app/services/firebase';
     IonLabel,
     IonList,
     IonButton,
-    IonText
+    IonText,
+    IonInput
   ]
 })
 export class AdicionarContatoPage implements OnInit {

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Database, ref, push, set, onValue } from '@angular/fire/database';
+import { getDatabase, ref, push, set, onValue } from 'firebase/database';
 import { Observable } from 'rxjs';
+import { firebaseConfig } from 'src/environments/environment';
+import { initializeApp } from 'firebase/app';
 
 export interface Contato {
   id?: string;
@@ -12,27 +14,51 @@ export interface Contato {
   providedIn: 'root',
 })
 export class FirebaseService {
-  constructor(private db: Database) {}
+  // constructor(private db: Database) {}
+  private db = getDatabase(initializeApp(firebaseConfig));
 
-  // Adiciona um contato
-  addContato(contato: Contato) {
+  addContato(contato: Contato): Promise<void> {
     const contatosRef = ref(this.db, 'contatos');
     const novoContatoRef = push(contatosRef);
     return set(novoContatoRef, contato);
   }
 
-  // Lista contatos como Observable
   getContatos(): Observable<Contato[]> {
     return new Observable((observer) => {
       const contatosRef = ref(this.db, 'contatos');
       onValue(contatosRef, (snapshot) => {
         const data = snapshot.val();
-        const contatos: Contato[] = [];
-        for (let key in data) {
-          contatos.push({ id: key, ...data[key] });
-        }
-        observer.next(contatos);
-      });
+        const lista = data? Object.keys(data).map((id) => ({ id, ...data[id] }))
+        : [];
+        observer.next(lista);
+      }, (error) => observer.error(error));
     });
   }
+
+
+
+
+
+
+//   // Adiciona um contato
+//   addContato(contato: Contato) {
+//     const contatosRef = ref(this.db, 'contatos');
+//     const novoContatoRef = push(contatosRef);
+//     return set(novoContatoRef, contato);
+//   }
+
+//   // Lista contatos como Observable
+//   getContatos(): Observable<Contato[]> {
+//     return new Observable((observer) => {
+//       const contatosRef = ref(this.db, 'contatos');
+//       onValue(contatosRef, (snapshot) => {
+//         const data = snapshot.val();
+//         const contatos: Contato[] = [];
+//         for (let key in data) {
+//           contatos.push({ id: key, ...data[key] });
+//         }
+//         observer.next(contatos);
+//       });
+//     });
+//   }
 }

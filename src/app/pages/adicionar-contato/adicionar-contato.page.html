@@ -7,27 +7,29 @@
 <ion-content [fullscreen]="true">
   <ion-item>
     <ion-label position="stacked">Nome</ion-label>
-    <ion-input [(ngModel)]="contato.nome"></ion-input>
+    <ion-input [value]="contato.nome" (ionInput)="contato.nome = $any($event.target).value"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="stacked">Email</ion-label>
-    <ion-input [(ngModel)]="contato.email"></ion-input>
+    <ion-input [value]="contato.email" (ionInput)="contato.email = $any($event.target).value"></ion-input>
   </ion-item>
 
   <ion-button expand="full" (click)="salvarContato()">Salvar Contato</ion-button>
 
   <h2 style="margin: 16px 0;">Contatos Cadastrados</h2>
   <ion-list>
-    <ion-item *ngFor="let c of contatos; trackBy: trackById">
+    @for (c of contatos; track c.id) {
+    <ion-item>
       <ion-label>
         <h3>{{ c.nome }}</h3>
         <p>{{ c.email }}</p>
       </ion-label>
     </ion-item>
+  } @empty {
+    <ion-text color="medium">
+      <p>Nenhum contato encontrado.</p>
+    </ion-text>
+    }
   </ion-list>
-
-  <ion-text color="medium" *ngIf="contatos.length === 0">
-    <p>Nenhum contato encontrado.</p>
-  </ion-text>
 </ion-content>
