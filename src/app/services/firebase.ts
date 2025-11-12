@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getDatabase, ref, push, set, onValue } from 'firebase/database';
+import { getDatabase, ref, push, set, onValue, remove } from 'firebase/database';
 import { Observable } from 'rxjs';
 import { firebaseConfig } from 'src/environments/environment';
 import { initializeApp } from 'firebase/app';
@@ -33,6 +33,15 @@ export class FirebaseService {
         observer.next(lista);
       }, (error) => observer.error(error));
     });
+  }
+
+  excluirContato(id:string) {
+    const db = getDatabase();
+    const contatoRef = ref(db, 'contatos/'+id);
+
+    remove(contatoRef)
+      .then(() => console.log('Contato excluído com sucesso!'))
+      .catch((error) => console.error('Erro ao excluir contato:', error))
   }
 
 
