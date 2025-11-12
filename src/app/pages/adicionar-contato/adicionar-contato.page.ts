@@ -71,4 +71,8 @@ export class AdicionarContatoPage implements OnInit {
   trackById(index: number, item: Contato) {
     return item.id;
   }
+
+  async excluirContato(id:string) {
+    await this.firebaseService.excluirContato(id);
+  }
 }
